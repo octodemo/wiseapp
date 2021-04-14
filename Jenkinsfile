@@ -17,7 +17,7 @@ pipeline {
 
             steps { 
 
-                sh 'docker build -t deanj08/bombshell:1.1 .'
+                sh 'docker build -t deanj08/bombshell:test .'
             } 
 
         }         
@@ -27,7 +27,7 @@ pipeline {
        stage('Trivy Container Image Scan') {   
             steps {
    
-                 sh 'trivy image --light -s "HIGH,CRITICAL" deanj08/bombshell:1.1'
+                 sh 'trivy image --light -s "HIGH,CRITICAL" deanj08/bombshell:test'
                    
                  }
               }
@@ -48,7 +48,7 @@ pipeline {
                  script {
                     docker.withRegistry( "" , 'git' ) { 
                        
-                        sh 'docker push deanj08/bombshell:1.1'
+                        sh 'docker push deanj08/bombshell:test'
 
                       }
                    }
