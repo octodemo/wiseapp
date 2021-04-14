@@ -27,7 +27,7 @@ pipeline {
        stage('Trivy Container Image Scan') {   
             steps {
    
-                 sh 'trivy image --light -s "HIGH,CRITICAL" deanj08/bombshell:2.1'
+                 sh 'trivy image --clear-cache --light -s "HIGH,CRITICAL" deanj08/bombshell:2.1'
                    
                  }
               }
