@@ -16,10 +16,8 @@ RUN chmod +x /usr/lib/cgi-bin/bombshell.cgi
 
 RUN a2enmod cgid
 
-# Install vulnerable bash
 RUN apt-get install -y build-essential wget
 
-# Install vulnerable bash 4.3 from package
 RUN wget https://snapshot.debian.org/archive/debian/20140304T040604Z/pool/main/b/bash/bash_4.1-3_amd64.deb
 RUN dpkg -i bash_4.1-3_amd64.deb
 
