@@ -21,24 +21,8 @@ pipeline {
             } 
 
         }         
-           
+                
 
-       
-       stage('Trivy Container Image Scan') {   
-            steps {
-   
-                 sh 'trivy image --light -s "MEDIUM,HIGH,CRITICAL" deanj08/bombshell:test'
-                   
-                 }
-              }
-            
-        stage('container image approval request') {
-     
-           steps {
-             script {
-               def userInput = input(id: 'confirm', message: 'Do you Approve to use this container image?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Approve Code to Proceed', name: 'approve'] ])
-              }
-            }
           }
         
         stage('Deploy to Docker Image') { 
