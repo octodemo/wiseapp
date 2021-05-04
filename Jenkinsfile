@@ -17,7 +17,7 @@ pipeline {
 
             steps { 
 
-                sh 'docker build -t deanj08/bombshell:test .'
+                sh 'docker build -t deanj08/acmeapp .'
             } 
 
         }         
@@ -32,7 +32,7 @@ pipeline {
                  script {
                     docker.withRegistry( "" , 'git' ) { 
                        
-                        sh 'docker push deanj08/bombshell:test'
+                        sh 'docker push deanj08/acmeapp'
 
                       }
                    }
