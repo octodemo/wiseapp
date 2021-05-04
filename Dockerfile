@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y apache2
 RUN mkdir /var/run/apache2
 
 ADD cgi-bin/bombshell.cgi /usr/lib/cgi-bin/
-RUN chmod +x /usr/lib/cgi-bin/bombshell.cgi
+RUN chmod +x /usr/lib/cgi-bin/acmeapp.cgi
 
 RUN a2enmod cgid
 
