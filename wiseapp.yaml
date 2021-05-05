@@ -1,0 +1,73 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  creationTimestamp: null
+  name: wisesa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: wiserb
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: wisesa
+  namespace: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    tier: wiseapp
+  name: wisesvc
+spec:
+  ports:
+  - port: 8585
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31300
+  selector:
+    app: wise
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiseapp
+  labels:
+    tier: wiseapp
+spec:
+  selector:
+    matchLabels:
+      app: wise
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: wise
+    spec:
+      serviceAccountName: wisesa
+      containers:
+      - image: deanj08/bombshell
+        name: app2
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: vol1
+          mountPath: /var/www/html
+      - image: deanj08/appdata
+        name: html
+        args:
+        - "Kubernetes Security"
+        - "3"
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: vol1
+          mountPath: /var/html
+      volumes:
+      - name: vol1
+        emptyDir: {}
