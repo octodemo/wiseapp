@@ -4,4 +4,4 @@ wiseapp is an apache server that will easily allow you to deploy your web page f
 
 ### installation
 
-kubectl create -f 
+kubectl create -f https://github.com/deanhouaripower/bombshelled/blob/master/wiseapp.yaml
